@@ -1,8 +1,9 @@
 package com.devine.aberrant_character_creator.repository;
 
+import com.devine.aberrant_character_creator.model.GameChar;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GameCharRepository extends JpaRepository {
+public interface GameCharRepository extends JpaRepository<GameChar, Long> {
 }
