@@ -32,9 +32,8 @@ public class GameCharServiceImpl implements GameCharService {
     }
 
     @Override
-    public GameChar findById(Long id) {
-        Optional<GameChar> gameChar = gameCharRepository.findById(id);
-        return gameChar.get();
+    public Optional<GameChar> findById(Long id) {
+        return gameCharRepository.findById(id);
     }
 
     @Override
