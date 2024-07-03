@@ -1,5 +1,7 @@
 package com.devine.aberrant_character_creator.service;
 
+import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
+import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
 import com.devine.aberrant_character_creator.model.GameChar;
 import com.devine.aberrant_character_creator.repository.GameCharRepository;
 import org.springframework.stereotype.Service;
@@ -46,4 +48,23 @@ public class GameCharServiceImpl implements GameCharService {
         gameCharRepository.deleteById(id);
         return "Successfully deleted";
     }
+
+    @Override
+    public GameChar updateChar(GameCharUpdateDTO updateDTO, Long id) {
+        return gameCharRepository.findById(id)
+                .map(gameChar -> {
+                    if (updateDTO.getPlayer() != null) {
+                        gameChar.setPlayer(updateDTO.getPlayer());
+                    }
+                    if (updateDTO.getName() != null) {
+                        gameChar.setName(updateDTO.getName());
+                    }
+                    if (updateDTO.getNovaName() != null) {
+                        gameChar.setNovaName(updateDTO.getNovaName());
+                    }
+                    return gameCharRepository.save(gameChar);
+                })
+                .orElseThrow(() -> new GameCharNotFoundException(id));
+    }
+
 }

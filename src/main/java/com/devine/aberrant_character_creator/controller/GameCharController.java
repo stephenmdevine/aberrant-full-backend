@@ -1,9 +1,11 @@
 package com.devine.aberrant_character_creator.controller;
 
+import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
 import com.devine.aberrant_character_creator.model.GameChar;
 import com.devine.aberrant_character_creator.service.GameCharService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,14 +39,9 @@ public class GameCharController {
     }
 
     @PutMapping("/character/{id}")
-    GameChar updateChar(@RequestBody GameChar newChar, @PathVariable Long id) {
-        return gameCharService.findById(id)
-                .map(gameChar -> {
-                    gameChar.setPlayer(newChar.getPlayer());
-                    gameChar.setName(newChar.getName());
-                    gameChar.setNovaName(newChar.getNovaName());
-                    return gameCharService.createChar(gameChar);
-                }).orElseThrow(() -> new GameCharNotFoundException(id));
+    ResponseEntity<GameChar> updateChar(@RequestBody GameCharUpdateDTO updateDTO, @PathVariable Long id) {
+        GameChar updatedGameChar = gameCharService.updateChar(updateDTO, id);
+        return ResponseEntity.ok(updatedGameChar);
     }
 
     @DeleteMapping("/character/{id}")
