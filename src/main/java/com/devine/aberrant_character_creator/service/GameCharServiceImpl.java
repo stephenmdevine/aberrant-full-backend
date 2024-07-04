@@ -1,5 +1,6 @@
 package com.devine.aberrant_character_creator.service;
 
+import com.devine.aberrant_character_creator.dto.AllocateAttrPtsDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
 import com.devine.aberrant_character_creator.model.GameChar;
@@ -85,6 +86,14 @@ public class GameCharServiceImpl implements GameCharService {
                     return gameCharRepository.save(gameChar);
                 })
                 .orElseThrow(() -> new GameCharNotFoundException(id));
+    }
+
+    @Override
+    public GameChar allocateAttributePoints(AllocateAttrPtsDTO allocateAttrPtsDTO, Long id) throws IllegalArgumentException {
+        int totalPointsAllocated = allocateAttrPtsDTO.getAttributeValues().values().stream().mapToInt(Integer::intValue).sum();
+        if (totalPointsAllocated > allocateAttrPtsDTO.getAttributePoints()) {
+            throw new IllegalArgumentException("Insufficient attribute points");
+        }
     }
 
 }
