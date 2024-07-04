@@ -25,6 +25,18 @@ public class GameCharServiceImpl implements GameCharService {
         gameChar.setName(newChar.getName());
         gameChar.setNovaName(newChar.getNovaName());
 
+        gameChar.setConcept(newChar.getConcept());
+        gameChar.setNature(newChar.getNature());
+        gameChar.setAllegiance(newChar.getAllegiance());
+        gameChar.setDescription(newChar.getDescription());
+
+        gameChar.setAttributePoints(newChar.getAttributePoints());
+        gameChar.setAbilityPoints(newChar.getAbilityPoints());
+        gameChar.setBackgroundPoints(newChar.getBackgroundPoints());
+        gameChar.setBonusPoints(newChar.getBonusPoints());
+        gameChar.setNovaPoints(newChar.getNovaPoints());
+        gameChar.setExperiencePoints(newChar.getExperiencePoints());
+
         return (GameChar) gameCharRepository.save(gameChar);
     }
 
@@ -53,15 +65,23 @@ public class GameCharServiceImpl implements GameCharService {
     public GameChar updateChar(GameCharUpdateDTO updateDTO, Long id) {
         return gameCharRepository.findById(id)
                 .map(gameChar -> {
-                    if (updateDTO.getPlayer() != null) {
-                        gameChar.setPlayer(updateDTO.getPlayer());
-                    }
-                    if (updateDTO.getName() != null) {
-                        gameChar.setName(updateDTO.getName());
-                    }
-                    if (updateDTO.getNovaName() != null) {
-                        gameChar.setNovaName(updateDTO.getNovaName());
-                    }
+                    if (updateDTO.getPlayer() != null) {gameChar.setPlayer(updateDTO.getPlayer());}
+                    if (updateDTO.getName() != null) {gameChar.setName(updateDTO.getName());}
+                    if (updateDTO.getNovaName() != null) {gameChar.setNovaName(updateDTO.getNovaName());}
+
+                    if (updateDTO.getConcept() != null) {gameChar.setConcept(updateDTO.getConcept());}
+                    if (updateDTO.getNature() != null) {gameChar.setNature(updateDTO.getNature());}
+                    if (updateDTO.getAllegiance() != null) {gameChar.setAllegiance(updateDTO.getAllegiance());}
+                    if (updateDTO.getDescription() != null) {gameChar.setDescription(updateDTO.getDescription());}
+
+
+                    if (updateDTO.getAttributePoints() != 0) {gameChar.setAttributePoints(updateDTO.getAttributePoints());}
+                    if (updateDTO.getAbilityPoints() != 0) {gameChar.setAbilityPoints(updateDTO.getAbilityPoints());}
+                    if (updateDTO.getBackgroundPoints() != 0) {gameChar.setBackgroundPoints(updateDTO.getBackgroundPoints());}
+                    if (updateDTO.getBonusPoints() != 0) {gameChar.setBonusPoints(updateDTO.getBonusPoints());}
+                    if (updateDTO.getNovaPoints() != 0) {gameChar.setNovaPoints(updateDTO.getNovaPoints());}
+                    if (updateDTO.getExperiencePoints() != 0) {gameChar.setExperiencePoints(updateDTO.getExperiencePoints());}
+
                     return gameCharRepository.save(gameChar);
                 })
                 .orElseThrow(() -> new GameCharNotFoundException(id));
