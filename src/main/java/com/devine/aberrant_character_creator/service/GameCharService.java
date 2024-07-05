@@ -1,6 +1,6 @@
 package com.devine.aberrant_character_creator.service;
 
-import com.devine.aberrant_character_creator.dto.AllocateAttrPtsDTO;
+import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.model.GameChar;
 
@@ -15,6 +15,6 @@ public interface GameCharService {
     Boolean existsById(Long id);
     String deleteById(Long id);
     GameChar updateChar(GameCharUpdateDTO updateDTO, Long id);
-    GameChar allocateAttributePoints(AllocateAttrPtsDTO allocateAttrPtsDTO, Long id) throws IllegalArgumentException;
+    GameChar allocateAttributePoints(AttributeUpdateDTO updateDTO, Long id, int maxTotalValue);
 
 }

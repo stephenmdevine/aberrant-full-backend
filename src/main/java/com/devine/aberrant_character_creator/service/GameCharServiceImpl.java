@@ -1,6 +1,6 @@
 package com.devine.aberrant_character_creator.service;
 
-import com.devine.aberrant_character_creator.dto.AllocateAttrPtsDTO;
+import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
 import com.devine.aberrant_character_creator.model.GameChar;
@@ -89,11 +89,25 @@ public class GameCharServiceImpl implements GameCharService {
     }
 
     @Override
-    public GameChar allocateAttributePoints(AllocateAttrPtsDTO allocateAttrPtsDTO, Long id) throws IllegalArgumentException {
-        int totalPointsAllocated = allocateAttrPtsDTO.getAttributeValues().values().stream().mapToInt(Integer::intValue).sum();
-        if (totalPointsAllocated > allocateAttrPtsDTO.getAttributePoints()) {
-            throw new IllegalArgumentException("Insufficient attribute points");
+    public GameChar allocateAttributePoints(AttributeUpdateDTO updateDTO, Long id, int maxTotalValue) {
+
+        Optional<GameChar> optionalGameChar = gameCharRepository.findById(id);
+        if (!optionalGameChar.isPresent()) {
+            throw new GameCharNotFoundException(id);
         }
+
+        GameChar gameChar = optionalGameChar.get();
+        int totalValue = updateDTO.getAttributes().stream().mapToInt(AttributeUpdateDTO.AttributeDTO::getValue).sum();
+
+        if (totalValue > maxTotalValue) {
+            throw new IllegalArgumentException("Total value of attributes exceeds the allowed maximum.");
+        }
+
+        for (AttributeUpdateDTO.AttributeDTO attributeDTO : updateDTO.getAttributes()) {
+            gameChar.getAttributes().stream().filter(attribute -> attribute.getName().equals(attributeDTO.getName())).findFirst().ifPresent(attribute -> attribute.setValue(attributeDTO.getValue()));
+        }
+
+        return gameCharRepository.save(gameChar);
     }
 
 }

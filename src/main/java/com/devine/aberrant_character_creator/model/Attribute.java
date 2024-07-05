@@ -11,16 +11,16 @@ public class Attribute extends AbstractValue {
 
     private int novaPurchased;
 
-    @ManyToOne
-    @JoinColumn(name = "attribute_set_id")
-    private AttributeSet attributeSet;
+//    @ManyToOne
+//    @JoinColumn(name = "attribute_set_id")
+//    private AttributeSet attributeSet;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "game_char_id")
     private GameChar gameChar;
 
-    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Quality> qualities;
-    @OneToMany(mappedBy = "attribute")
-    private List<Power> powers;
+//    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    private List<Quality> qualities;
+//    @OneToMany(mappedBy = "attribute")
+//    private List<Power> powers;
 
 }

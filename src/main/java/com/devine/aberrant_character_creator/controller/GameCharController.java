@@ -1,6 +1,6 @@
 package com.devine.aberrant_character_creator.controller;
 
-import com.devine.aberrant_character_creator.dto.AllocateAttrPtsDTO;
+import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
 import com.devine.aberrant_character_creator.model.GameChar;
@@ -59,8 +59,8 @@ public class GameCharController {
     }
 
     @PostMapping("/allocateAttributePoints/{id}")
-    GameChar allocateAttributePoints(@RequestBody AllocateAttrPtsDTO allocateAttrPtsDTO, @PathVariable Long id) {
-        return gameCharService.allocateAttributePoints(allocateAttrPtsDTO, id);
+    GameChar allocateAttributePoints(@RequestBody AttributeUpdateDTO updateDTO, @PathVariable Long id, @RequestParam int maxTotalValue) {
+        return gameCharService.allocateAttributePoints(updateDTO, id, maxTotalValue);
     }
 
 }
