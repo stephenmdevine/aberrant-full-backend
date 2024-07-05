@@ -58,9 +58,9 @@ public class GameCharController {
         return "Character with id " + id + "has been successfully deleted.";
     }
 
-    @PostMapping("/allocateAttributePoints/{id}")
-    GameChar allocateAttributePoints(@RequestBody AttributeUpdateDTO updateDTO, @PathVariable Long id, @RequestParam int maxTotalValue) {
-        return gameCharService.allocateAttributePoints(updateDTO, id, maxTotalValue);
+    @PutMapping("/allocateAttributePoints/{id}")
+    GameChar allocateAttributePoints(@RequestBody AttributeUpdateDTO updateDTO, @PathVariable Long id) {
+        return gameCharService.allocateAttributePoints(updateDTO, id);
     }
 
 }

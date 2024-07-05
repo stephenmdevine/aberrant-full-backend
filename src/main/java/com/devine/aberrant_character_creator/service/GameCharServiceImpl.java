@@ -89,7 +89,7 @@ public class GameCharServiceImpl implements GameCharService {
     }
 
     @Override
-    public GameChar allocateAttributePoints(AttributeUpdateDTO updateDTO, Long id, int maxTotalValue) {
+    public GameChar allocateAttributePoints(AttributeUpdateDTO updateDTO, Long id) {
 
         Optional<GameChar> optionalGameChar = gameCharRepository.findById(id);
         if (!optionalGameChar.isPresent()) {
@@ -97,14 +97,20 @@ public class GameCharServiceImpl implements GameCharService {
         }
 
         GameChar gameChar = optionalGameChar.get();
-        int totalValue = updateDTO.getAttributes().stream().mapToInt(AttributeUpdateDTO.AttributeDTO::getValue).sum();
+        int maxTotalValue = gameChar.getAttributePoints();
+        int totalValue = updateDTO.getAttributes().stream()
+                .mapToInt(AttributeUpdateDTO.AttributeDTO::getValue).sum();
 
         if (totalValue > maxTotalValue) {
             throw new IllegalArgumentException("Total value of attributes exceeds the allowed maximum.");
         }
 
         for (AttributeUpdateDTO.AttributeDTO attributeDTO : updateDTO.getAttributes()) {
-            gameChar.getAttributes().stream().filter(attribute -> attribute.getName().equals(attributeDTO.getName())).findFirst().ifPresent(attribute -> attribute.setValue(attributeDTO.getValue()));
+            gameChar.getAttributes().stream()
+                    .filter(attribute ->
+                            attribute.getName().equals(attributeDTO.getName()))
+                    .findFirst().ifPresent(attribute ->
+                            attribute.setValue(attributeDTO.getValue()));
         }
 
         return gameCharRepository.save(gameChar);

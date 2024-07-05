@@ -15,6 +15,6 @@ public interface GameCharService {
     Boolean existsById(Long id);
     String deleteById(Long id);
     GameChar updateChar(GameCharUpdateDTO updateDTO, Long id);
-    GameChar allocateAttributePoints(AttributeUpdateDTO updateDTO, Long id, int maxTotalValue);
+    GameChar allocateAttributePoints(AttributeUpdateDTO updateDTO, Long id);
 
 }
