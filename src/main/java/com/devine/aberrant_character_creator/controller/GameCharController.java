@@ -3,6 +3,7 @@ package com.devine.aberrant_character_creator.controller;
 import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
+import com.devine.aberrant_character_creator.model.Attribute;
 import com.devine.aberrant_character_creator.model.GameChar;
 import com.devine.aberrant_character_creator.service.GameCharService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,14 @@ public class GameCharController {
         return "Character with id " + id + "has been successfully deleted.";
     }
 
-    @PutMapping("/allocateAttributePoints/{id}")
+//    Endpoint to retrieve a character's attributes by its ID
+    @GetMapping("/attributes/{id}")
+    public ResponseEntity<List<Attribute>> getCharAttributes(@PathVariable Long id) {
+        List<Attribute> attributes = gameCharService.getCharAttributes(id);
+        return ResponseEntity.ok(attributes);
+    }
+
+    @PostMapping("/allocateAttributePoints/{id}")
     GameChar allocateAttributePoints(@RequestBody AttributeUpdateDTO updateDTO, @PathVariable Long id) {
         return gameCharService.allocateAttributePoints(updateDTO, id);
     }

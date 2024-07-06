@@ -3,6 +3,7 @@ package com.devine.aberrant_character_creator.service;
 import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
+import com.devine.aberrant_character_creator.model.Attribute;
 import com.devine.aberrant_character_creator.model.GameChar;
 import com.devine.aberrant_character_creator.repository.GameCharRepository;
 import org.springframework.stereotype.Service;
@@ -101,7 +102,7 @@ public class GameCharServiceImpl implements GameCharService {
         int totalValue = updateDTO.getAttributes().stream()
                 .mapToInt(AttributeUpdateDTO.AttributeDTO::getValue).sum();
 
-        if (totalValue > maxTotalValue) {
+        if (totalValue - 9 > maxTotalValue) {
             throw new IllegalArgumentException("Total value of attributes exceeds the allowed maximum.");
         }
 
@@ -114,6 +115,15 @@ public class GameCharServiceImpl implements GameCharService {
         }
 
         return gameCharRepository.save(gameChar);
+    }
+
+    @Override
+    public List<Attribute> getCharAttributes(Long id) {
+        Optional<GameChar> optionalGameChar = gameCharRepository.findById(id);
+        if (!optionalGameChar.isPresent()) {
+            throw new GameCharNotFoundException(id);
+        }
+        return optionalGameChar.get().getAttributes();
     }
 
 }

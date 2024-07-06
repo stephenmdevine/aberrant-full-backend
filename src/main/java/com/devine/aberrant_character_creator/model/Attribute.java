@@ -11,9 +11,6 @@ public class Attribute extends AbstractValue {
 
     private int novaPurchased;
 
-//    @ManyToOne
-//    @JoinColumn(name = "attribute_set_id")
-//    private AttributeSet attributeSet;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "game_char_id")
     private GameChar gameChar;
