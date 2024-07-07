@@ -1,5 +1,6 @@
 package com.devine.aberrant_character_creator.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -33,12 +34,26 @@ public class GameChar {
     private int experiencePoints;
 
 //    Relational link to other tables
-    @OneToMany(mappedBy = "gameChar")
+    @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Attribute> attributes = new ArrayList<>();
 //    @OneToMany(mappedBy = "gameChar")
 //    private List<AttributeSet> attributeSets = new ArrayList<>();
 
-    public GameChar() {    }
+    public GameChar() {
+        initializeAttributes();
+    }
+
+    private void initializeAttributes() {
+        String[] attributeNames = {"Strength", "Dexterity", "Stamina", "Perception", "Intelligence", "Wits", "Appearance", "Manipulation", "Charisma"};
+        for (String attributeName : attributeNames) {
+            Attribute attribute = new Attribute();
+            attribute.setName(attributeName);
+            attribute.setValue(1);
+            attribute.setGameChar(this);
+            attributes.add(attribute);
+        }
+    }
 
 //    Method to retrieve the value of a specific attribute by name
     public int getAttributeValue(String attributeName) {

@@ -6,12 +6,15 @@ import com.devine.aberrant_character_creator.exception.GameCharNotFoundException
 import com.devine.aberrant_character_creator.model.Attribute;
 import com.devine.aberrant_character_creator.model.GameChar;
 import com.devine.aberrant_character_creator.repository.GameCharRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class GameCharServiceImpl implements GameCharService {
 
     private GameCharRepository gameCharRepository;
@@ -98,6 +101,9 @@ public class GameCharServiceImpl implements GameCharService {
         }
 
         GameChar gameChar = optionalGameChar.get();
+        if (gameChar.getAttributes() == null) {
+            gameChar.setAttributes(new ArrayList<>());
+        }
         int maxTotalValue = gameChar.getAttributePoints();
         int totalValue = updateDTO.getAttributes().stream()
                 .mapToInt(AttributeUpdateDTO.AttributeDTO::getValue).sum();
@@ -110,8 +116,10 @@ public class GameCharServiceImpl implements GameCharService {
             gameChar.getAttributes().stream()
                     .filter(attribute ->
                             attribute.getName().equals(attributeDTO.getName()))
-                    .findFirst().ifPresent(attribute ->
-                            attribute.setValue(attributeDTO.getValue()));
+                    .findFirst().ifPresent(attribute -> {
+                        attribute.setValue(attributeDTO.getValue());
+                        System.out.println("Updated attribute: " + attribute.getName() + " to value: " + attribute.getValue());
+                    });
         }
 
         return gameCharRepository.save(gameChar);

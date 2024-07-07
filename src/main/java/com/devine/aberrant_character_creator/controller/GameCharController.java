@@ -66,7 +66,7 @@ public class GameCharController {
         return ResponseEntity.ok(attributes);
     }
 
-    @PostMapping("/allocateAttributePoints/{id}")
+    @PutMapping("/allocateAttributePoints/{id}")
     GameChar allocateAttributePoints(@RequestBody AttributeUpdateDTO updateDTO, @PathVariable Long id) {
         return gameCharService.allocateAttributePoints(updateDTO, id);
     }
