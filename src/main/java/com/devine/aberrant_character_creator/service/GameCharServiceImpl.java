@@ -1,8 +1,10 @@
 package com.devine.aberrant_character_creator.service;
 
+import com.devine.aberrant_character_creator.dto.AbilityUpdateDTO;
 import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
+import com.devine.aberrant_character_creator.model.Ability;
 import com.devine.aberrant_character_creator.model.Attribute;
 import com.devine.aberrant_character_creator.model.GameChar;
 import com.devine.aberrant_character_creator.repository.GameCharRepository;
@@ -132,6 +134,48 @@ public class GameCharServiceImpl implements GameCharService {
             throw new GameCharNotFoundException(id);
         }
         return optionalGameChar.get().getAttributes();
+    }
+
+    @Override
+    public GameChar allocateAbilityPoints(AbilityUpdateDTO updateDTO, Long id) {
+
+        Optional<GameChar> optionalGameChar = gameCharRepository.findById(id);
+        if (!optionalGameChar.isPresent()) {
+            throw new GameCharNotFoundException(id);
+        }
+
+        GameChar gameChar = optionalGameChar.get();
+        if (gameChar.getAbilities() == null) {
+            gameChar.setAbilities(new ArrayList<>());
+        }
+        int maxTotalValue = gameChar.getAbilityPoints();
+        int totalValue = updateDTO.getAbilities().stream()
+                .mapToInt(AbilityUpdateDTO.AbilityDTO::getValue).sum();
+
+        if (totalValue > maxTotalValue) {
+            throw new IllegalArgumentException("Total value of attributes exceeds the allowed maximum.");
+        }
+
+        for (AbilityUpdateDTO.AbilityDTO abilityDTO : updateDTO.getAbilities()) {
+            gameChar.getAbilities().stream()
+                    .filter(ability ->
+                            ability.getName().equals(abilityDTO.getName()))
+                    .findFirst().ifPresent(ability -> {
+                        ability.setValue(abilityDTO.getValue());
+                        System.out.println("Updated ability: " + ability.getName() + " to value: " + ability.getValue());
+                    });
+        }
+
+        return gameCharRepository.save(gameChar);
+    }
+
+    @Override
+    public List<Ability> getCharAbilities(Long id) {
+        Optional<GameChar> optionalGameChar = gameCharRepository.findById(id);
+        if (!optionalGameChar.isPresent()) {
+            throw new GameCharNotFoundException(id);
+        }
+        return optionalGameChar.get().getAbilities();
     }
 
 }

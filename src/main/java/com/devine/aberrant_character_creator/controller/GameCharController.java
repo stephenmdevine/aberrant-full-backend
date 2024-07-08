@@ -1,8 +1,10 @@
 package com.devine.aberrant_character_creator.controller;
 
+import com.devine.aberrant_character_creator.dto.AbilityUpdateDTO;
 import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
+import com.devine.aberrant_character_creator.model.Ability;
 import com.devine.aberrant_character_creator.model.Attribute;
 import com.devine.aberrant_character_creator.model.GameChar;
 import com.devine.aberrant_character_creator.service.GameCharService;
@@ -69,6 +71,18 @@ public class GameCharController {
     @PutMapping("/allocateAttributePoints/{id}")
     GameChar allocateAttributePoints(@RequestBody AttributeUpdateDTO updateDTO, @PathVariable Long id) {
         return gameCharService.allocateAttributePoints(updateDTO, id);
+    }
+
+//    Endpoint to retrieve a character's abilities by its ID
+    @GetMapping("/attributes/{id}")
+    public ResponseEntity<List<Ability>> getCharAbilities(@PathVariable Long id) {
+        List<Ability> abilities = gameCharService.getCharAbilities(id);
+        return ResponseEntity.ok(abilities);
+    }
+
+    @PutMapping("/allocateAbilityPoints/{id}")
+    GameChar allocateAbilityPoints(@RequestBody AbilityUpdateDTO updateDTO, @PathVariable Long id) {
+        return gameCharService.allocateAbilityPoints(updateDTO, id);
     }
 
 }
