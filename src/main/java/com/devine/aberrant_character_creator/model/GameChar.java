@@ -61,23 +61,40 @@ public class GameChar {
     }
 
     private void initializeAbilities() {
-        String[] abilityNames = {
-                "Brawl", "Might", "Throwing",
-                "Archery", "Athletics", "Drive", "Firearms", "Gunnery", "Heavy Weapons", "Legerdemain",
-                    "Martial Arts", "Melee", "Pilot", "Ride", "Stealth",
-                "Endurance", "Resistance",
-                "Artillery", "Awareness", "Investigation", "Navigation",
-                "Academics", "Analysis", "Bureaucracy", "Computer", "Demolitions", "Engineering", "Gambling",
-                    "Intrusion", "Linguistics", "Medicine", "Occult", "Science", "Survival", "Tradecraft",
-                "Arts", "Biz", "Meditation", "Rapport", "Shadowing", "Tactics", "Weave",
-                "Disguise", "Intimidation", "Style",
-                "Diplomacy", "Hypnosis", "Interrogation", "Seduction", "Streetwise", "Subterfuge",
-                "Animal Training", "Carousing", "Command", "Etiquette", "Instruction", "Perform"
+        String[][] abilityData = {
+                {"Brawl", "Strength"}, {"Might", "Strength"}, {"Throwing", "Strength"},
+                {"Archery", "Dexterity"}, {"Athletics", "Dexterity"}, {"Drive", "Dexterity"},
+                {"Firearms", "Dexterity"}, {"Gunnery", "Dexterity"}, {"Heavy Weapons", "Dexterity"},
+                {"Legerdemain", "Dexterity"}, {"Martial Arts", "Dexterity"}, {"Melee", "Dexterity"},
+                {"Pilot", "Dexterity"}, {"Ride", "Dexterity"}, {"Stealth", "Dexterity"},
+                {"Endurance", "Stamina"}, {"Resistance", "Stamina"},
+                {"Artillery", "Perception"}, {"Awareness", "Perception"}, {"Investigation", "Perception"},
+                {"Navigation", "Perception"},
+                {"Academics", "Intelligence"}, {"Analysis", "Intelligence"}, {"Bureaucracy", "Intelligence"},
+                {"Computer", "Intelligence"}, {"Demolitions", "Intelligence"}, {"Engineering", "Intelligence"},
+                {"Gambling", "Intelligence"}, {"Intrusion", "Intelligence"}, {"Linguistics", "Intelligence"},
+                {"Medicine", "Intelligence"}, {"Occult", "Intelligence"}, {"Science", "Intelligence"},
+                {"Survival", "Intelligence"}, {"Tradecraft", "Intelligence"},
+                {"Arts", "Wits"}, {"Biz", "Wits"}, {"Meditation", "Wits"}, {"Rapport", "Wits"},
+                {"Shadowing", "Wits"}, {"Tactics", "Wits"}, {"Weave", "Wits"},
+                {"Disguise", "Appearance"}, {"Intimidation", "Appearance"}, {"Style", "Appearance"},
+                {"Diplomacy", "Manipulation"}, {"Hypnosis", "Manipulation"}, {"Interrogation", "Manipulation"},
+                {"Seduction", "Manipulation"}, {"Streetwise", "Manipulation"}, {"Subterfuge", "Manipulation"},
+                {"Animal Training", "Charisma"}, {"Carousing", "Charisma"}, {"Command", "Charisma"},
+                {"Etiquette", "Charisma"}, {"Instruction", "Charisma"}, {"Perform", "Charisma"}
         };
-        for (String abilityName : abilityNames) {
+        for (String[] abilityInfo : abilityData) {
+            String abilityName = abilityInfo[0];
+            String associatedAttribute = abilityInfo[1];
+
             Ability ability = new Ability();
             ability.setName(abilityName);
             ability.setValue(0);
+            // Set initial values for Stamina abilities
+            if (abilityName.equals("Endurance") || abilityName.equals("Resistance")) {
+                ability.setValue(3);
+            }
+            ability.setAssociatedAttribute(associatedAttribute);
             ability.setGameChar(this);
             abilities.add(ability);
         }

@@ -11,6 +11,7 @@ import lombok.Data;
 public class Ability extends AbstractValue {
 
     private int novaPurchased;
+    private String associatedAttribute;
 
     @ManyToOne
     @JoinColumn(name = "game_char_id")

@@ -74,7 +74,7 @@ public class GameCharController {
     }
 
 //    Endpoint to retrieve a character's abilities by its ID
-    @GetMapping("/attributes/{id}")
+    @GetMapping("/abilities/{id}")
     public ResponseEntity<List<Ability>> getCharAbilities(@PathVariable Long id) {
         List<Ability> abilities = gameCharService.getCharAbilities(id);
         return ResponseEntity.ok(abilities);
