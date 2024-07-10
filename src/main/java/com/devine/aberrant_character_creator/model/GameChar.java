@@ -40,10 +40,14 @@ public class GameChar {
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Ability> abilities = new ArrayList<>();
+    @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Background> backgrounds = new ArrayList<>();
 
     public GameChar() {
         initializeAttributes();
         initializeAbilities();
+        initializeBackgrounds();
     }
 
     private void initializeAttributes() {
@@ -100,6 +104,19 @@ public class GameChar {
         }
     }
 
+    private void initializeBackgrounds() {
+        String[] backgroundNames = {
+                "Allies", "Attunement", "Backing", "Cipher", "Contacts", "Dormancy", "Equipment",
+                "Eufiber", "Favors", "Followers", "Influence", "Mentor", "Node", "Rank", "Resources"};
+        for (String backgroundName : backgroundNames) {
+            Background background = new Background();
+            background.setName(backgroundName);
+            background.setValue(0);
+            background.setGameChar(this);
+            backgrounds.add(background);
+        }
+    }
+
 //    Method to retrieve the value of a specific attribute by name
     public int getAttributeValue(String attributeName) {
         for (Attribute attribute : attributes) {
@@ -116,6 +133,17 @@ public class GameChar {
         for (Ability ability : abilities) {
             if (ability.getName().equalsIgnoreCase(abilityName)) {
                 return ability.getValue();
+            }
+        }
+//        Return a default value or handle the case when the ability is not found
+        return 0;
+    }
+
+//    Method to retrieve the value of a specific background by name
+    public int getBackgroundValue(String backgroundName) {
+        for (Background background : backgrounds) {
+            if (background.getName().equalsIgnoreCase(backgroundName)) {
+                return background.getValue();
             }
         }
 //        Return a default value or handle the case when the ability is not found

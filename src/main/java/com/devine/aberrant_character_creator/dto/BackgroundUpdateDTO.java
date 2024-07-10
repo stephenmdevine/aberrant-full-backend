@@ -5,15 +5,14 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class AbilityUpdateDTO {
+public class BackgroundUpdateDTO {
 
-    private List<AbilityDTO> abilities;
+    private List<BackgroundDTO> backgrounds;
 
     @Data
-    public static class AbilityDTO {
+    public static class BackgroundDTO {
         private String name;
         private int value;
-        private String associatedAttribute;
     }
 
 }

@@ -2,10 +2,12 @@ package com.devine.aberrant_character_creator.service;
 
 import com.devine.aberrant_character_creator.dto.AbilityUpdateDTO;
 import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
+import com.devine.aberrant_character_creator.dto.BackgroundUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
 import com.devine.aberrant_character_creator.model.Ability;
 import com.devine.aberrant_character_creator.model.Attribute;
+import com.devine.aberrant_character_creator.model.Background;
 import com.devine.aberrant_character_creator.model.GameChar;
 import com.devine.aberrant_character_creator.repository.GameCharRepository;
 import jakarta.transaction.Transactional;
@@ -176,6 +178,48 @@ public class GameCharServiceImpl implements GameCharService {
             throw new GameCharNotFoundException(id);
         }
         return optionalGameChar.get().getAbilities();
+    }
+
+    @Override
+    public GameChar allocateBackgroundPoints(BackgroundUpdateDTO updateDTO, Long id) {
+
+        Optional<GameChar> optionalGameChar = gameCharRepository.findById(id);
+        if (!optionalGameChar.isPresent()) {
+            throw new GameCharNotFoundException(id);
+        }
+
+        GameChar gameChar = optionalGameChar.get();
+        if (gameChar.getBackgrounds() == null) {
+            gameChar.setBackgrounds(new ArrayList<>());
+        }
+        int maxTotalValue = gameChar.getBackgroundPoints();
+        int totalValue = updateDTO.getBackgrounds().stream()
+                .mapToInt(BackgroundUpdateDTO.BackgroundDTO::getValue).sum();
+
+        if (totalValue > maxTotalValue) {
+            throw new IllegalArgumentException("Total value of backgrounds exceeds the allowed maximum.");
+        }
+
+        for (BackgroundUpdateDTO.BackgroundDTO backgroundDTO : updateDTO.getBackgrounds()) {
+            gameChar.getBackgrounds().stream()
+                    .filter(background ->
+                            background.getName().equals(backgroundDTO.getName()))
+                    .findFirst().ifPresent(background -> {
+                        background.setValue(backgroundDTO.getValue());
+                        System.out.println("Updated background: " + background.getName() + " to value: " + background.getValue());
+                    });
+        }
+
+        return gameCharRepository.save(gameChar);
+    }
+
+    @Override
+    public List<Background> getCharBackgrounds(Long id) {
+        Optional<GameChar> optionalGameChar = gameCharRepository.findById(id);
+        if (!optionalGameChar.isPresent()) {
+            throw new GameCharNotFoundException(id);
+        }
+        return optionalGameChar.get().getBackgrounds();
     }
 
 }

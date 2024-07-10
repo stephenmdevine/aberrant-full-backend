@@ -2,9 +2,11 @@ package com.devine.aberrant_character_creator.service;
 
 import com.devine.aberrant_character_creator.dto.AbilityUpdateDTO;
 import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
+import com.devine.aberrant_character_creator.dto.BackgroundUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.model.Ability;
 import com.devine.aberrant_character_creator.model.Attribute;
+import com.devine.aberrant_character_creator.model.Background;
 import com.devine.aberrant_character_creator.model.GameChar;
 
 import java.util.List;
@@ -22,5 +24,7 @@ public interface GameCharService {
     List<Attribute> getCharAttributes(Long id);
     GameChar allocateAbilityPoints(AbilityUpdateDTO updateDTO, Long id);
     List<Ability> getCharAbilities(Long id);
+    GameChar allocateBackgroundPoints(BackgroundUpdateDTO updateDTO, Long id);
+    List<Background> getCharBackgrounds(Long id);
 
 }
