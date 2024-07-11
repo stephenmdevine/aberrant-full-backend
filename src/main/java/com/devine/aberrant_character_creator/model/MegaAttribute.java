@@ -10,18 +10,20 @@ import java.util.List;
 
 @Entity
 @Data
-public class Ability extends AbstractValue {
-
-    private int novaPurchased;
-    private String associatedAttribute;
+public class MegaAttribute extends AbstractValue {
 
     @ManyToOne
     @JoinColumn(name = "game_char_id")
     @JsonBackReference
     private GameChar gameChar;
 
-    @OneToMany(mappedBy = "ability", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
+    @JoinColumn(name = "attribute_id")
+    @JsonBackReference
+    private Attribute attribute;
+
+    @OneToMany(mappedBy = "megaAttribute", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Specialty> specialties = new ArrayList<>();
+    private List<Enhancement> enhancements = new ArrayList<>();
 
 }

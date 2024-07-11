@@ -43,6 +43,18 @@ public class GameChar {
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Background> backgrounds = new ArrayList<>();
+    @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<MegaAttribute> megaAttributes = new ArrayList<>();
+    @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Flaw> flaws = new ArrayList<>();
+    @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Merit> merits = new ArrayList<>();
+    @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Power> powers = new ArrayList<>();
 
     public GameChar() {
         initializeAttributes();
