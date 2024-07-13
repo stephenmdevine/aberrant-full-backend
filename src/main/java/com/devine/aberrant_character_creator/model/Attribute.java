@@ -16,19 +16,19 @@ public class Attribute extends AbstractValue {
 
     @ManyToOne
     @JoinColumn(name = "game_char_id")
-    @JsonBackReference
+    @JsonBackReference("attribute-gameChar")
     private GameChar gameChar;
 
     @OneToOne(mappedBy = "attribute")
-    @JsonManagedReference
+    @JsonManagedReference("megaAttribute-attribute")
     private MegaAttribute megaAttribute;
 
     @OneToOne(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("attribute-quality")
     private Quality quality;
 
     @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("power-attribute")
     private List<Power> powers = new ArrayList<>();
 
 }

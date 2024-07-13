@@ -17,11 +17,11 @@ public class Ability extends AbstractValue {
 
     @ManyToOne
     @JoinColumn(name = "game_char_id")
-    @JsonBackReference
+    @JsonBackReference("ability-gameChar")
     private GameChar gameChar;
 
     @OneToMany(mappedBy = "ability", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("specialty-ability")
     private List<Specialty> specialties = new ArrayList<>();
 
 }

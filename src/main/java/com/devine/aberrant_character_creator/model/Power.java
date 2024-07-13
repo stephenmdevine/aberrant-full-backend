@@ -19,12 +19,12 @@ public class Power extends AbstractValue {
 
     @ManyToOne
     @JoinColumn(name = "game_char_id")
-    @JsonBackReference
+    @JsonBackReference("power-gameChar")
     private GameChar gameChar;
 
     @ManyToOne
     @JoinColumn(name = "attribute_id")
-    @JsonBackReference
+    @JsonBackReference("power-attribute")
     private Attribute attribute;
 
 }

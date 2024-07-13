@@ -14,7 +14,7 @@ public class Flaw extends AbstractValue {
 
     @ManyToOne
     @JoinColumn(name = "game_char_id")
-    @JsonBackReference
+    @JsonBackReference("flaw-gameChar")
     private GameChar gameChar;
 
 }

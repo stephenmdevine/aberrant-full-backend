@@ -12,7 +12,7 @@ public class Specialty extends AbstractValue {
 
     @ManyToOne
     @JoinColumn(name = "ability_id")
-    @JsonBackReference
+    @JsonBackReference("specialty-ability")
     private Ability ability;
 
 }

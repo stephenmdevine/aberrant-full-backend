@@ -35,25 +35,25 @@ public class GameChar {
 
 //    Relational link to other tables
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("attribute-gameChar")
     private List<Attribute> attributes = new ArrayList<>();
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("ability-gameChar")
     private List<Ability> abilities = new ArrayList<>();
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("background-gameChar")
     private List<Background> backgrounds = new ArrayList<>();
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("megaAttribute-gameChar")
     private List<MegaAttribute> megaAttributes = new ArrayList<>();
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("flaw-gameChar")
     private List<Flaw> flaws = new ArrayList<>();
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("merit-gameChar")
     private List<Merit> merits = new ArrayList<>();
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("power-gameChar")
     private List<Power> powers = new ArrayList<>();
 
     public GameChar() {

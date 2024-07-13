@@ -14,7 +14,7 @@ public class Background extends AbstractValue {
 
     @ManyToOne
     @JoinColumn(name = "game_char_id")
-    @JsonBackReference
+    @JsonBackReference("background-gameChar")
     private GameChar gameChar;
 
 }

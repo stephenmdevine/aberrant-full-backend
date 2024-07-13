@@ -14,16 +14,16 @@ public class MegaAttribute extends AbstractValue {
 
     @ManyToOne
     @JoinColumn(name = "game_char_id")
-    @JsonBackReference
+    @JsonBackReference("megaAttribute-gameChar")
     private GameChar gameChar;
 
     @OneToOne
     @JoinColumn(name = "attribute_id")
-    @JsonBackReference
+    @JsonBackReference("megaAttribute-attribute")
     private Attribute attribute;
 
     @OneToMany(mappedBy = "megaAttribute", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("enhancement-megaAttribute")
     private List<Enhancement> enhancements = new ArrayList<>();
 
 }

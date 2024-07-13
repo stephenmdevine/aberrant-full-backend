@@ -14,7 +14,7 @@ public class Quality extends AbstractValue {
 
     @OneToOne
     @JoinColumn(name = "attribute_id")
-    @JsonBackReference
+    @JsonBackReference("attribute-quality")
     private Attribute attribute;
 
 }

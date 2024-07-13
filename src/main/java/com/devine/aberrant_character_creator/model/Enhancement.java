@@ -14,7 +14,7 @@ public class Enhancement extends AbstractValue {
 
     @ManyToOne
     @JoinColumn(name = "mega_attribute_id")
-    @JsonBackReference
+    @JsonBackReference("enhancement-megaAttribute")
     private MegaAttribute megaAttribute;
 
 }
