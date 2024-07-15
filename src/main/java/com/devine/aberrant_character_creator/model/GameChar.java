@@ -25,6 +25,13 @@ public class GameChar {
     private String allegiance;
     private String description;
 
+//    Additional Character stats
+    private int willpower = 3;
+    private int quantum = 1;
+    private int quantumPoolBase = 20;
+    private int initiativeBonus = 0;
+    private int taint = 0;
+
 //    Point fields for character creation expenditure
     private int attributePoints;
     private int abilityPoints;
