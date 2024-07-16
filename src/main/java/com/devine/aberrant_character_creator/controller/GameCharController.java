@@ -5,10 +5,7 @@ import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
 import com.devine.aberrant_character_creator.dto.BackgroundUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
-import com.devine.aberrant_character_creator.model.Ability;
-import com.devine.aberrant_character_creator.model.Attribute;
-import com.devine.aberrant_character_creator.model.Background;
-import com.devine.aberrant_character_creator.model.GameChar;
+import com.devine.aberrant_character_creator.model.*;
 import com.devine.aberrant_character_creator.service.GameCharService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -97,6 +94,12 @@ public class GameCharController {
     @PutMapping("/allocateBackgroundPoints/{id}")
     GameChar allocateBackgroundPoints(@RequestBody BackgroundUpdateDTO updateDTO, @PathVariable Long id) {
         return gameCharService.allocateBackgroundPoints(updateDTO, id);
+    }
+
+    @PostMapping("/{id}/flaws")
+    public ResponseEntity<Flaw> addFlaw(@PathVariable Long id, @RequestBody Flaw flaw) {
+        Flaw createdFlaw = gameCharService.addFlawToGameChar(id, flaw);
+        return ResponseEntity.ok(createdFlaw);
     }
 
 }

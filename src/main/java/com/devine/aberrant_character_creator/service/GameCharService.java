@@ -4,10 +4,7 @@ import com.devine.aberrant_character_creator.dto.AbilityUpdateDTO;
 import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
 import com.devine.aberrant_character_creator.dto.BackgroundUpdateDTO;
 import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
-import com.devine.aberrant_character_creator.model.Ability;
-import com.devine.aberrant_character_creator.model.Attribute;
-import com.devine.aberrant_character_creator.model.Background;
-import com.devine.aberrant_character_creator.model.GameChar;
+import com.devine.aberrant_character_creator.model.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,5 +23,6 @@ public interface GameCharService {
     List<Ability> getCharAbilities(Long id);
     GameChar allocateBackgroundPoints(BackgroundUpdateDTO updateDTO, Long id);
     List<Background> getCharBackgrounds(Long id);
+    Flaw addFlawToGameChar(Long id, Flaw newFlaw);
 
 }
