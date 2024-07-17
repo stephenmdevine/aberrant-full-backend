@@ -10,8 +10,6 @@ import lombok.Data;
 @Data
 public class Merit extends AbstractValue {
 
-    private String description;
-
     @ManyToOne
     @JoinColumn(name = "game_char_id")
     @JsonBackReference("merit-gameChar")

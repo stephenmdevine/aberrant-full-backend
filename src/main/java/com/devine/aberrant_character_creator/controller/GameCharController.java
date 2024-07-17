@@ -102,4 +102,10 @@ public class GameCharController {
         return ResponseEntity.ok(createdFlaw);
     }
 
+    @PostMapping("/{id}/merits")
+    public ResponseEntity<Merit> addMerit(@PathVariable Long id, @RequestBody Merit merit) {
+        Merit createdMerit = gameCharService.addMeritToGameChar(id, merit);
+        return ResponseEntity.ok(createdMerit);
+    }
+
 }

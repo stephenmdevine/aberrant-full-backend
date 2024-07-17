@@ -24,5 +24,6 @@ public interface GameCharService {
     GameChar allocateBackgroundPoints(BackgroundUpdateDTO updateDTO, Long id);
     List<Background> getCharBackgrounds(Long id);
     Flaw addFlawToGameChar(Long id, Flaw newFlaw);
+    Merit addMeritToGameChar(Long id, Merit newMerit);
 
 }

@@ -8,6 +8,7 @@ import com.devine.aberrant_character_creator.exception.GameCharNotFoundException
 import com.devine.aberrant_character_creator.model.*;
 import com.devine.aberrant_character_creator.repository.FlawRepository;
 import com.devine.aberrant_character_creator.repository.GameCharRepository;
+import com.devine.aberrant_character_creator.repository.MeritRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class GameCharServiceImpl implements GameCharService {
     private GameCharRepository gameCharRepository;
     @Autowired
     private FlawRepository flawRepository;
+    @Autowired
+    private MeritRepository meritRepository;
 
     public GameCharServiceImpl(GameCharRepository gameCharRepository) {
         this.gameCharRepository = gameCharRepository;
@@ -236,6 +239,20 @@ public class GameCharServiceImpl implements GameCharService {
         gameChar.getFlaws().add(flaw); // Ensure the flaw is added to the GameChar's list of flaws
         gameCharRepository.save(gameChar); // Save the updated GameChar entity
         return flawRepository.save(flaw);
+    }
+
+    @Override
+    public Merit addMeritToGameChar(Long id, Merit newMerit) {
+        GameChar gameChar = gameCharRepository.findById(id)
+                .orElseThrow(() -> new GameCharNotFoundException(id));
+
+        Merit merit = new Merit();
+        merit.setName(newMerit.getName());
+        merit.setValue(newMerit.getValue());
+        merit.setGameChar(gameChar);
+        gameChar.getMerits().add(merit); // Ensure the merit is added to the GameChar's list of merits
+        gameCharRepository.save(gameChar); // Save the updated GameChar entity
+        return meritRepository.save(merit);
     }
 
 }
