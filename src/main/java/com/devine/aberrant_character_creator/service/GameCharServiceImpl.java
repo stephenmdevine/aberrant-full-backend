@@ -148,13 +148,6 @@ public class GameCharServiceImpl implements GameCharService {
         if (gameChar.getAbilities() == null) {
             gameChar.setAbilities(new ArrayList<>());
         }
-        int maxTotalValue = gameChar.getAbilityPoints();
-        int totalValue = updateDTO.getAbilities().stream()
-                .mapToInt(AbilityUpdateDTO.AbilityDTO::getValue).sum();
-
-        if (totalValue > maxTotalValue) {
-            throw new IllegalArgumentException("Total value of attributes exceeds the allowed maximum.");
-        }
 
         for (AbilityUpdateDTO.AbilityDTO abilityDTO : updateDTO.getAbilities()) {
             gameChar.getAbilities().stream()
