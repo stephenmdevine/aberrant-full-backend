@@ -10,6 +10,8 @@ import lombok.Data;
 @Data
 public class Background extends AbstractValue {
 
+    private int bonusValue;
+    private int novaValue;
     private int novaPurchased;
 
     @ManyToOne

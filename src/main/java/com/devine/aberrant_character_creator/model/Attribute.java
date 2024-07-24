@@ -12,6 +12,8 @@ import java.util.List;
 @Data
 public class Attribute extends AbstractValue {
 
+    private int bonusValue;
+    private int novaValue;
     private int novaPurchased;
 
     @ManyToOne

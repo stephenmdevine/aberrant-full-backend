@@ -26,9 +26,11 @@ public class GameChar {
     private String description;
 
 //    Additional Character stats
-    private int willpower = 3;
-    private int quantum = 1;
-    private int quantumPoolBase = 20;
+    private int willpowerBonus = 0;  // Base is 3
+    private int willpowerNova = 0;
+    private int quantumBonus = 0;    // Base is 1
+    private int quantumNova = 0;
+    private int quantumPoolBonus = 0;   // Base is 20
     private int initiativeBonus = 0;
     private int taint = 0;
 

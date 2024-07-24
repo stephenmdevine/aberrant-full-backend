@@ -21,4 +21,12 @@ public class GameCharUpdateDTO {
     private int novaPoints;
     private int experiencePoints;
 
+    private int willpowerBonus;
+    private int willpowerNova;
+    private int quantumBonus;
+    private int quantumNova;
+    private int quantumPoolBonus;
+    private int initiativeBonus;
+    private int taint;
+
 }

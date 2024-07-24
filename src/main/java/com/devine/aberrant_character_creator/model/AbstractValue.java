@@ -15,5 +15,6 @@ public abstract class AbstractValue {
     private Long id;
     private String name;
     private int value;
+    private int expValue;
 
 }

@@ -13,6 +13,9 @@ public class AbilityUpdateDTO {
     public static class AbilityDTO {
         private String name;
         private int value;
+        private int bonusValue;
+        private int novaValue;
+        private int expValue;
         private String associatedAttribute;
     }
 

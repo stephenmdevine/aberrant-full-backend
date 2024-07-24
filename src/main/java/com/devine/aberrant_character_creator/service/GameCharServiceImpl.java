@@ -120,7 +120,14 @@ public class GameCharServiceImpl implements GameCharService {
                             attribute.getName().equals(attributeDTO.getName()))
                     .findFirst().ifPresent(attribute -> {
                         attribute.setValue(attributeDTO.getValue());
-                        System.out.println("Updated attribute: " + attribute.getName() + " to value: " + attribute.getValue());
+                        attribute.setBonusValue(attributeDTO.getBonusValue());
+                        attribute.setNovaValue(attributeDTO.getNovaValue());
+                        attribute.setExpValue(attributeDTO.getExpValue());
+                        System.out.println("Updated attribute: " + attribute.getName() + " to values: " +
+                                "Value = " + attribute.getValue() +
+                                ", Bonus Value = " + attribute.getBonusValue() +
+                                ", Nova Value = " + attribute.getNovaValue() +
+                                ", Exp Value = " + attribute.getExpValue());
                     });
         }
 
@@ -155,7 +162,14 @@ public class GameCharServiceImpl implements GameCharService {
                             ability.getName().equals(abilityDTO.getName()))
                     .findFirst().ifPresent(ability -> {
                         ability.setValue(abilityDTO.getValue());
-                        System.out.println("Updated ability: " + ability.getName() + " to value: " + ability.getValue());
+                        ability.setBonusValue(abilityDTO.getBonusValue());
+                        ability.setNovaValue(abilityDTO.getNovaValue());
+                        ability.setExpValue(abilityDTO.getExpValue());
+                        System.out.println("Updated ability: " + ability.getName() + " to values: " +
+                                "Value = " + ability.getValue() +
+                                ", Bonus Value = " + ability.getBonusValue() +
+                                ", Nova Value = " + ability.getNovaValue() +
+                                ", Exp Value = " + ability.getExpValue());
                     });
         }
 
@@ -183,13 +197,6 @@ public class GameCharServiceImpl implements GameCharService {
         if (gameChar.getBackgrounds() == null) {
             gameChar.setBackgrounds(new ArrayList<>());
         }
-        int maxTotalValue = gameChar.getBackgroundPoints();
-        int totalValue = updateDTO.getBackgrounds().stream()
-                .mapToInt(BackgroundUpdateDTO.BackgroundDTO::getValue).sum();
-
-        if (totalValue > maxTotalValue) {
-            throw new IllegalArgumentException("Total value of backgrounds exceeds the allowed maximum.");
-        }
 
         for (BackgroundUpdateDTO.BackgroundDTO backgroundDTO : updateDTO.getBackgrounds()) {
             gameChar.getBackgrounds().stream()
@@ -197,7 +204,14 @@ public class GameCharServiceImpl implements GameCharService {
                             background.getName().equals(backgroundDTO.getName()))
                     .findFirst().ifPresent(background -> {
                         background.setValue(backgroundDTO.getValue());
-                        System.out.println("Updated background: " + background.getName() + " to value: " + background.getValue());
+                        background.setBonusValue(backgroundDTO.getBonusValue());
+                        background.setNovaValue(backgroundDTO.getNovaValue());
+                        background.setExpValue(background.getExpValue());
+                        System.out.println("Updated background: " + background.getName() + " to values: " +
+                                "Value = " + background.getValue() +
+                                ", Bonus Value = " + background.getBonusValue() +
+                                ", Nova Value = " + background.getNovaValue() +
+                                ", Exp Value = " + background.getExpValue());
                     });
         }
 

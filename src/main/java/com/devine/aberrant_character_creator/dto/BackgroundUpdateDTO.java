@@ -13,6 +13,9 @@ public class BackgroundUpdateDTO {
     public static class BackgroundDTO {
         private String name;
         private int value;
+        private int bonusValue;
+        private int novaValue;
+        private int expValue;
     }
 
 }
