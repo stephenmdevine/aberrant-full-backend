@@ -1,5 +1,6 @@
 package com.devine.aberrant_character_creator.controller;
 
+import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
 import com.devine.aberrant_character_creator.model.Ability;
 import com.devine.aberrant_character_creator.model.Specialty;
 import com.devine.aberrant_character_creator.repository.AbilityRepository;
@@ -47,6 +48,15 @@ public class SpecialtyController {
         }   else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteById(@PathVariable Long id) {
+        if (!specialtyRepository.existsById(id)) {
+            throw new GameCharNotFoundException(id);
+        }
+        specialtyRepository.deleteById(id);
+        return "Specialty with id " + id + "has been successfully deleted.";
     }
 
 }
