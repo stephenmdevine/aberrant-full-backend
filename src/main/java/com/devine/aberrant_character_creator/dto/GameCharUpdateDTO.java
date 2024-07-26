@@ -1,6 +1,10 @@
 package com.devine.aberrant_character_creator.dto;
 
+import com.devine.aberrant_character_creator.model.Flaw;
+import com.devine.aberrant_character_creator.model.Merit;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class GameCharUpdateDTO {
@@ -28,5 +32,8 @@ public class GameCharUpdateDTO {
     private int quantumPoolBonus;
     private int initiativeBonus;
     private int taint;
+
+    private List<Flaw> flaws;
+    private List<Merit> merits;
 
 }
