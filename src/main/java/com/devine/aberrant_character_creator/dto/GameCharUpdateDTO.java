@@ -36,4 +36,8 @@ public class GameCharUpdateDTO {
     private List<Flaw> flaws;
     private List<Merit> merits;
 
+    private List<AttributeUpdateDTO.AttributeDTO> attributes;
+    private List<AbilityUpdateDTO.AbilityDTO> abilities;
+    private List<BackgroundUpdateDTO.BackgroundDTO> backgrounds;
+
 }

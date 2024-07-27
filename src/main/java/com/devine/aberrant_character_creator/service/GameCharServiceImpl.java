@@ -79,6 +79,7 @@ public class GameCharServiceImpl implements GameCharService {
     public GameChar updateChar(GameCharUpdateDTO updateDTO, Long id) {
         return gameCharRepository.findById(id)
                 .map(gameChar -> {
+                    // Update basic information
                     if (updateDTO.getPlayer() != null) {gameChar.setPlayer(updateDTO.getPlayer());}
                     if (updateDTO.getName() != null) {gameChar.setName(updateDTO.getName());}
                     if (updateDTO.getNovaName() != null) {gameChar.setNovaName(updateDTO.getNovaName());}
@@ -88,13 +89,69 @@ public class GameCharServiceImpl implements GameCharService {
                     if (updateDTO.getAllegiance() != null) {gameChar.setAllegiance(updateDTO.getAllegiance());}
                     if (updateDTO.getDescription() != null) {gameChar.setDescription(updateDTO.getDescription());}
 
+                    // Update points
+                    gameChar.setAttributePoints(updateDTO.getAttributePoints());
+                    gameChar.setAbilityPoints(updateDTO.getAbilityPoints());
+                    gameChar.setBackgroundPoints(updateDTO.getBackgroundPoints());
+                    gameChar.setBonusPoints(updateDTO.getBonusPoints());
+                    gameChar.setNovaPoints(updateDTO.getNovaPoints());
+                    gameChar.setExperiencePoints(updateDTO.getExperiencePoints());
 
-                    if (updateDTO.getAttributePoints() != 0) {gameChar.setAttributePoints(updateDTO.getAttributePoints());}
-                    if (updateDTO.getAbilityPoints() != 0) {gameChar.setAbilityPoints(updateDTO.getAbilityPoints());}
-                    if (updateDTO.getBackgroundPoints() != 0) {gameChar.setBackgroundPoints(updateDTO.getBackgroundPoints());}
-                    if (updateDTO.getBonusPoints() != 0) {gameChar.setBonusPoints(updateDTO.getBonusPoints());}
-                    if (updateDTO.getNovaPoints() != 0) {gameChar.setNovaPoints(updateDTO.getNovaPoints());}
-                    if (updateDTO.getExperiencePoints() != 0) {gameChar.setExperiencePoints(updateDTO.getExperiencePoints());}
+                    // Update additional stats
+                    gameChar.setWillpowerBonus(updateDTO.getWillpowerBonus());
+                    gameChar.setQuantumBonus(updateDTO.getQuantumBonus());
+                    gameChar.setQuantumNova(updateDTO.getQuantumNova());
+                    gameChar.setQuantumPoolBonus(updateDTO.getQuantumPoolBonus());
+                    gameChar.setInitiativeBonus(updateDTO.getInitiativeBonus());
+                    gameChar.setTaint(updateDTO.getTaint());
+
+                    // Update attributes
+                    if (updateDTO.getAttributes() != null) {
+                        for (AttributeUpdateDTO.AttributeDTO attrDTO : updateDTO.getAttributes()) {
+                            Attribute attribute = gameChar.getAttributes()
+                                    .stream()
+                                    .filter(a -> a.getName().equals(attrDTO.getName()))
+                                    .findFirst()
+                                    .orElseThrow(() -> new IllegalArgumentException());
+                            attribute.setValue(attrDTO.getValue());
+                        }
+                    }
+
+                    // Update abilities
+                    if (updateDTO.getAbilities() != null) {
+                        for (AbilityUpdateDTO.AbilityDTO abilDTO : updateDTO.getAbilities()) {
+                            Ability ability = gameChar.getAbilities()
+                                    .stream()
+                                    .filter(a -> a.getName().equals(abilDTO.getName()))
+                                    .findFirst()
+                                    .orElseThrow(() -> new IllegalArgumentException());
+                            ability.setValue(abilDTO.getValue());
+                        }
+                    }
+
+                    // Update backgrounds
+                    if (updateDTO.getBackgrounds() != null) {
+                        for (BackgroundUpdateDTO.BackgroundDTO bkgDTO : updateDTO.getBackgrounds()) {
+                            Background background = gameChar.getBackgrounds()
+                                    .stream()
+                                    .filter(b -> b.getName().equals(bkgDTO.getName()))
+                                    .findFirst()
+                                    .orElseThrow(() -> new IllegalArgumentException());
+                            background.setValue(bkgDTO.getValue());
+                        }
+                    }
+
+                    // Update flaws
+                    if (updateDTO.getFlaws() != null) {
+                        gameChar.getFlaws().clear();
+                        gameChar.getFlaws().addAll(updateDTO.getFlaws());
+                    }
+
+                    // Update merits
+                    if (updateDTO.getMerits() != null) {
+                        gameChar.getMerits().clear();
+                        gameChar.getMerits().addAll(updateDTO.getMerits());
+                    }
 
                     return gameCharRepository.save(gameChar);
                 })
