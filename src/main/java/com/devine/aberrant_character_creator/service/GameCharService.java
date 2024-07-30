@@ -17,6 +17,7 @@ public interface GameCharService {
     Boolean existsById(Long id);
     String deleteById(Long id);
     GameChar updateChar(GameCharUpdateDTO updateDTO, Long id);
+    GameChar updateAdditionalCharStats(GameCharUpdateDTO updateDTO, Long id);
     GameChar allocateAttributePoints(AttributeUpdateDTO updateDTO, Long id);
     List<Attribute> getCharAttributes(Long id);
     GameChar allocateAbilityPoints(AbilityUpdateDTO updateDTO, Long id);

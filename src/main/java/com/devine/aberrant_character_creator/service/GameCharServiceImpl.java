@@ -159,6 +159,28 @@ public class GameCharServiceImpl implements GameCharService {
     }
 
     @Override
+    public GameChar updateAdditionalCharStats(GameCharUpdateDTO updateDTO, Long id) {
+        return gameCharRepository.findById(id)
+                .map(gameChar -> {
+                    // Update points
+                    gameChar.setBonusPoints(updateDTO.getBonusPoints());
+                    gameChar.setNovaPoints(updateDTO.getNovaPoints());
+                    gameChar.setExperiencePoints(updateDTO.getExperiencePoints());
+
+                    // Update additional stats
+                    gameChar.setWillpowerBonus(updateDTO.getWillpowerBonus());
+                    gameChar.setQuantumBonus(updateDTO.getQuantumBonus());
+                    gameChar.setQuantumNova(updateDTO.getQuantumNova());
+                    gameChar.setQuantumPoolBonus(updateDTO.getQuantumPoolBonus());
+                    gameChar.setInitiativeBonus(updateDTO.getInitiativeBonus());
+                    gameChar.setTaint(updateDTO.getTaint());
+
+                    return gameCharRepository.save(gameChar);
+                })
+                .orElseThrow(() -> new GameCharNotFoundException(id));
+    }
+
+    @Override
     public GameChar allocateAttributePoints(AttributeUpdateDTO updateDTO, Long id) {
 
         Optional<GameChar> optionalGameChar = gameCharRepository.findById(id);
