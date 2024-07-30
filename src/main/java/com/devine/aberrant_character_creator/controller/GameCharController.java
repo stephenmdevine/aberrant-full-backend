@@ -51,6 +51,12 @@ public class GameCharController {
         return ResponseEntity.ok(updatedGameChar);
     }
 
+    @PutMapping("/character/additionalStats/{id}")
+    ResponseEntity<GameChar> updateAdditionalStats(@RequestBody GameCharUpdateDTO updateDTO, @PathVariable Long id) {
+        GameChar updatedGameChar = gameCharService.updateAdditionalCharStats(updateDTO, id);
+        return ResponseEntity.ok(updatedGameChar);
+    }
+
 //    Endpoint to delete a character by its ID
     @DeleteMapping("/character/{id}")
     String deleteChar(@PathVariable Long id) {
