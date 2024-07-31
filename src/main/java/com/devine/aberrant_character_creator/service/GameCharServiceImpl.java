@@ -198,10 +198,10 @@ public class GameCharServiceImpl implements GameCharService {
                     .filter(attribute ->
                             attribute.getName().equals(attributeDTO.getName()))
                     .findFirst().ifPresent(attribute -> {
-                        attribute.setValue(attributeDTO.getValue());
-                        attribute.setBonusValue(attributeDTO.getBonusValue());
-                        attribute.setNovaValue(attributeDTO.getNovaValue());
-                        attribute.setExpValue(attributeDTO.getExpValue());
+                        attribute.setValue(attributeDTO.getValue()); // Set whatever value is provided
+                        attribute.setBonusValue(attributeDTO.getBonusValue()); // Set whatever value is provided
+                        attribute.setNovaValue(attributeDTO.getNovaValue()); // Set whatever value is provided
+                        attribute.setExpValue(attributeDTO.getExpValue()); // Set whatever value is provided
                         System.out.println("Updated attribute: " + attribute.getName() + " to values: " +
                                 "Value = " + attribute.getValue() +
                                 ", Bonus Value = " + attribute.getBonusValue() +
