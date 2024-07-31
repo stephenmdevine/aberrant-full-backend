@@ -317,7 +317,7 @@ public class GameCharServiceImpl implements GameCharService {
         flaw.setGameChar(gameChar);
         gameChar.getFlaws().add(flaw); // Ensure the flaw is added to the GameChar's list of flaws
         gameCharRepository.save(gameChar); // Save the updated GameChar entity
-        return flawRepository.save(flaw);
+        return flaw;
     }
 
     @Override
@@ -331,7 +331,7 @@ public class GameCharServiceImpl implements GameCharService {
         merit.setGameChar(gameChar);
         gameChar.getMerits().add(merit); // Ensure the merit is added to the GameChar's list of merits
         gameCharRepository.save(gameChar); // Save the updated GameChar entity
-        return meritRepository.save(merit);
+        return merit;
     }
 
 }
