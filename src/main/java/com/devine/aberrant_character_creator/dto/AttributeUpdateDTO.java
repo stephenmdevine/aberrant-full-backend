@@ -16,6 +16,7 @@ public class AttributeUpdateDTO {
         private int bonusValue;
         private int novaValue;
         private int expValue;
+        private String qualityName;
     }
 
 }
