@@ -2,6 +2,7 @@ package com.devine.aberrant_character_creator.controller;
 
 import com.devine.aberrant_character_creator.dto.QualityDTO;
 import com.devine.aberrant_character_creator.model.Attribute;
+import com.devine.aberrant_character_creator.model.Quality;
 import com.devine.aberrant_character_creator.service.AttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,16 @@ public class AttributeController {
 
     @Autowired
     private AttributeService attributeService;
+
+    @GetMapping("/{attributeId}/quality")
+    public ResponseEntity<Quality> fetchQualityByAttribute(@PathVariable Long attributeId) {
+        Quality quality = attributeService.findQualityByAttributeId(attributeId);
+        if (quality != null) {
+            return ResponseEntity.ok(quality);
+        }   else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     // Endpoint to create or update a quality for a given attribute
     @PostMapping("/{attributeId}/quality")

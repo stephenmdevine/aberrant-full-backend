@@ -8,6 +8,7 @@ import com.devine.aberrant_character_creator.exception.GameCharNotFoundException
 import com.devine.aberrant_character_creator.model.*;
 import com.devine.aberrant_character_creator.service.GameCharService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,14 @@ public class GameCharController {
 
 //    Endpoint to save new character data
     @PostMapping("/character")
-    GameChar newChar(@RequestBody GameChar newChar) {
-        return (GameChar) gameCharService.createChar(newChar);
+    public ResponseEntity<GameChar> newChar(@RequestBody GameChar newChar) {
+        try {
+            GameChar createdChar = gameCharService.createChar(newChar);
+            return ResponseEntity.ok(createdChar);
+        }   catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
 //    Endpoint to retrieve all characters

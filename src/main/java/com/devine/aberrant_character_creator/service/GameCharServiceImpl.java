@@ -34,6 +34,8 @@ public class GameCharServiceImpl implements GameCharService {
 
     @Override
     public GameChar createChar(GameChar newChar) {
+        System.out.println(newChar);
+
         GameChar gameChar = new GameChar();
         gameChar.setPlayer(newChar.getPlayer());
         gameChar.setName(newChar.getName());
@@ -51,7 +53,7 @@ public class GameCharServiceImpl implements GameCharService {
         gameChar.setNovaPoints(newChar.getNovaPoints());
         gameChar.setExperiencePoints(newChar.getExperiencePoints());
 
-        return (GameChar) gameCharRepository.save(gameChar);
+        return gameCharRepository.save(gameChar);
     }
 
     @Override

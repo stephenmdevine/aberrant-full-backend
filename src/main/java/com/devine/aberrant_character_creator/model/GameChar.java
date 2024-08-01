@@ -171,4 +171,30 @@ public class GameChar {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return "GameChar{" +
+                "id=" + id +
+                ", player='" + player + '\'' +
+                ", name='" + name + '\'' +
+                ", novaName='" + novaName + '\'' +
+                ", concept='" + concept + '\'' +
+                ", nature='" + nature + '\'' +
+                ", allegiance='" + allegiance + '\'' +
+                ", description='" + description + '\'' +
+                ", willpowerBonus=" + willpowerBonus +
+                ", willpowerNova=" + willpowerNova +
+                ", quantumBonus=" + quantumBonus +
+                ", quantumNova=" + quantumNova +
+                ", quantumPoolBonus=" + quantumPoolBonus +
+                ", initiativeBonus=" + initiativeBonus +
+                ", taint=" + taint +
+                ", attributePoints=" + attributePoints +
+                ", abilityPoints=" + abilityPoints +
+                ", backgroundPoints=" + backgroundPoints +
+                ", bonusPoints=" + bonusPoints +
+                ", novaPoints=" + novaPoints +
+                ", experiencePoints=" + experiencePoints +
+                '}';
+    }
 }
