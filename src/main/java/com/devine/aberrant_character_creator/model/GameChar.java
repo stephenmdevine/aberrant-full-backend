@@ -69,6 +69,7 @@ public class GameChar {
         initializeAttributes();
         initializeAbilities();
         initializeBackgrounds();
+        initializeMegaAttributes();
     }
 
     private void initializeAttributes() {
@@ -135,6 +136,20 @@ public class GameChar {
             background.setValue(0);
             background.setGameChar(this);
             backgrounds.add(background);
+        }
+    }
+
+    private void initializeMegaAttributes() {
+        String[] megaAttributeNames = {
+                "Mega-Strength", "Mega-Dexterity", "Mega-Stamina",
+                "Mega-Perception", "Mega-Intelligence", "Mega-Wits",
+                "Mega-Appearance", "Mega-Manipulation", "Mega-Charisma"};
+        for (String megaAttributeName : megaAttributeNames) {
+            MegaAttribute megaAttribute = new MegaAttribute();
+            megaAttribute.setName(megaAttributeName);
+            megaAttribute.setValue(0);
+            megaAttribute.setGameChar(this);
+            megaAttributes.add(megaAttribute);
         }
     }
 
