@@ -1,9 +1,6 @@
 package com.devine.aberrant_character_creator.controller;
 
-import com.devine.aberrant_character_creator.dto.AbilityUpdateDTO;
-import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
-import com.devine.aberrant_character_creator.dto.BackgroundUpdateDTO;
-import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
+import com.devine.aberrant_character_creator.dto.*;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
 import com.devine.aberrant_character_creator.model.*;
 import com.devine.aberrant_character_creator.service.GameCharService;
@@ -120,6 +117,11 @@ public class GameCharController {
     public ResponseEntity<Merit> addMerit(@PathVariable Long id, @RequestBody Merit merit) {
         Merit createdMerit = gameCharService.addMeritToGameChar(id, merit);
         return ResponseEntity.ok(createdMerit);
+    }
+
+    @PutMapping("/allocateMegaAttributePoints/{id}")
+    GameChar allocateMegaAttributePoints(@RequestBody MegaAttributeUpdateDTO updateDTO, @PathVariable Long id) {
+        return gameCharService.allocateMegaAttributePoints(updateDTO, id);
     }
 
 }

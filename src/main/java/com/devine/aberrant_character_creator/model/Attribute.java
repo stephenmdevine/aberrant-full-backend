@@ -22,10 +22,6 @@ public class Attribute extends AbstractValue {
     private GameChar gameChar;
 
     @OneToOne(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("megaAttribute-attribute")
-    private MegaAttribute megaAttribute;
-
-    @OneToOne(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("attribute-quality")
     private Quality quality;
 
@@ -39,7 +35,6 @@ public class Attribute extends AbstractValue {
                 "bonusValue=" + bonusValue +
                 ", novaValue=" + novaValue +
                 ", novaPurchased=" + novaPurchased +
-                ", megaAttribute=" + megaAttribute +
                 ", quality=" + quality +
                 ", powers=" + powers +
                 '}';

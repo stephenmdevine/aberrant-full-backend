@@ -17,11 +17,6 @@ public class MegaAttribute extends AbstractValue {
     @JsonBackReference("megaAttribute-gameChar")
     private GameChar gameChar;
 
-    @OneToOne
-    @JoinColumn(name = "attribute_id")
-    @JsonBackReference("megaAttribute-attribute")
-    private Attribute attribute;
-
     @OneToMany(mappedBy = "megaAttribute", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("enhancement-megaAttribute")
     private List<Enhancement> enhancements = new ArrayList<>();

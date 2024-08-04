@@ -1,14 +1,9 @@
 package com.devine.aberrant_character_creator.service;
 
-import com.devine.aberrant_character_creator.dto.AbilityUpdateDTO;
-import com.devine.aberrant_character_creator.dto.AttributeUpdateDTO;
-import com.devine.aberrant_character_creator.dto.BackgroundUpdateDTO;
-import com.devine.aberrant_character_creator.dto.GameCharUpdateDTO;
+import com.devine.aberrant_character_creator.dto.*;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
 import com.devine.aberrant_character_creator.model.*;
-import com.devine.aberrant_character_creator.repository.FlawRepository;
-import com.devine.aberrant_character_creator.repository.GameCharRepository;
-import com.devine.aberrant_character_creator.repository.MeritRepository;
+import com.devine.aberrant_character_creator.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +22,8 @@ public class GameCharServiceImpl implements GameCharService {
     private FlawRepository flawRepository;
     @Autowired
     private MeritRepository meritRepository;
+    @Autowired
+    private MegaAttributeRepository megaAttributeRepository;
 
     public GameCharServiceImpl(GameCharRepository gameCharRepository) {
         this.gameCharRepository = gameCharRepository;
@@ -334,6 +331,35 @@ public class GameCharServiceImpl implements GameCharService {
         gameChar.getMerits().add(merit); // Ensure the merit is added to the GameChar's list of merits
         gameCharRepository.save(gameChar); // Save the updated GameChar entity
         return merit;
+    }
+
+    @Override
+    public GameChar allocateMegaAttributePoints(MegaAttributeUpdateDTO updateDTO, Long id) {
+
+        Optional<GameChar> optionalGameChar = gameCharRepository.findById(id);
+        if (!optionalGameChar.isPresent()) {
+            throw new GameCharNotFoundException(id);
+        }
+
+        GameChar gameChar = optionalGameChar.get();
+        if (gameChar.getMegaAttributes() == null) {
+            gameChar.setMegaAttributes(new ArrayList<>());
+        }
+
+        for (MegaAttributeUpdateDTO.MegaAttributeDTO megaAttributeDTO : updateDTO.getMegaAttributes()) {
+            gameChar.getMegaAttributes().stream()
+                    .filter(megaAttribute ->
+                            megaAttribute.getName().equals(megaAttributeDTO.getName()))
+                    .findFirst().ifPresent(megaAttribute -> {
+                        megaAttribute.setValue(megaAttributeDTO.getValue()); // Set whatever value is provided
+                        megaAttribute.setExpValue(megaAttributeDTO.getExpValue()); // Set whatever value is provided
+                        System.out.println("Updated attribute: " + megaAttribute.getName() + " to values: " +
+                                "Value = " + megaAttribute.getValue() +
+                                ", Exp Value = " + megaAttribute.getExpValue());
+                    });
+        }
+
+        return gameCharRepository.save(gameChar);
     }
 
 }
