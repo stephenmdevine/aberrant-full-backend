@@ -102,6 +102,7 @@ public class GameCharServiceImpl implements GameCharService {
                     gameChar.setQuantumNova(updateDTO.getQuantumNova());
                     gameChar.setQuantumPoolBonus(updateDTO.getQuantumPoolBonus());
                     gameChar.setInitiativeBonus(updateDTO.getInitiativeBonus());
+                    gameChar.setBaseTaint(updateDTO.getBaseTaint());
                     gameChar.setTaint(updateDTO.getTaint());
 
                     // Update attributes
@@ -172,6 +173,7 @@ public class GameCharServiceImpl implements GameCharService {
                     gameChar.setQuantumNova(updateDTO.getQuantumNova());
                     gameChar.setQuantumPoolBonus(updateDTO.getQuantumPoolBonus());
                     gameChar.setInitiativeBonus(updateDTO.getInitiativeBonus());
+                    gameChar.setBaseTaint(updateDTO.getBaseTaint());
                     gameChar.setTaint(updateDTO.getTaint());
 
                     return gameCharRepository.save(gameChar);

@@ -32,6 +32,7 @@ public class GameChar {
     private int quantumNova = 0;
     private int quantumPoolBonus = 0;   // Base is 20
     private int initiativeBonus = 0;
+    private int baseTaint = 0;
     private int taint = 0;
 
 //    Point fields for character creation expenditure

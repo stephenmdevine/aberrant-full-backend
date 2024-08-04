@@ -31,6 +31,7 @@ public class GameCharUpdateDTO {
     private int quantumNova;
     private int quantumPoolBonus;
     private int initiativeBonus;
+    private int baseTaint;
     private int taint;
 
     private List<Flaw> flaws;
