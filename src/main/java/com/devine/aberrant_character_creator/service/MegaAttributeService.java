@@ -1,12 +1,9 @@
 package com.devine.aberrant_character_creator.service;
 
 import com.devine.aberrant_character_creator.dto.EnhancementDTO;
-import com.devine.aberrant_character_creator.dto.QualityDTO;
 import com.devine.aberrant_character_creator.exception.GameCharNotFoundException;
-import com.devine.aberrant_character_creator.model.Attribute;
 import com.devine.aberrant_character_creator.model.Enhancement;
 import com.devine.aberrant_character_creator.model.MegaAttribute;
-import com.devine.aberrant_character_creator.model.Quality;
 import com.devine.aberrant_character_creator.repository.EnhancementRepository;
 import com.devine.aberrant_character_creator.repository.MegaAttributeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
