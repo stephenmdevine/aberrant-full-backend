@@ -15,9 +15,10 @@ public class PowerController {
     @Autowired
     private PowerService powerService;
 
-    @PostMapping
-    public ResponseEntity<Power> createPower(@RequestBody PowerDTO powerDTO) {
-        Power newPower = powerService.createPower(powerDTO);
+    @PostMapping("/{id}")
+    public ResponseEntity<Power> createPower(@RequestBody PowerDTO powerDTO, @PathVariable Long id) {
+        Power newPower = powerService.createPower(powerDTO, id);
+        System.out.println("Post mapping initiated...");
         return ResponseEntity.ok(newPower);
     }
 
