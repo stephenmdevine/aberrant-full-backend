@@ -27,4 +27,7 @@ public class Power extends AbstractValue {
     @JsonBackReference("power-attribute")
     private Attribute attribute;
 
+    private String attrName;
+    private int attrValue;
+
 }

@@ -40,6 +40,8 @@ public class PowerService {
             Attribute attribute = attributeRepository.findById(powerDTO.getAttributeId())
                     .orElseThrow(() -> new GameCharNotFoundException(powerDTO.getAttributeId()));
             power.setAttribute(attribute);
+            power.setAttrName(attribute.getName());
+            power.setAttrValue(attribute.getValue() + attribute.getBonusValue() + attribute.getNovaValue() + attribute.getExpValue());
         } else {
             power.setAttribute(null);
         }
