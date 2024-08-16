@@ -42,6 +42,7 @@ public class GameChar {
     private int bonusPoints;
     private int novaPoints;
     private int experiencePoints;
+    private int expSpent;
 
 //    Relational link to other tables
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -77,11 +78,12 @@ public class GameChar {
         String[] attributeNames = {
                 "Strength", "Dexterity", "Stamina",
                 "Perception", "Intelligence", "Wits",
-                "Appearance", "Manipulation", "Charisma"};
+                "Appearance", "Manipulation", "Charisma", "No Attribute"};
         for (String attributeName : attributeNames) {
             Attribute attribute = new Attribute();
             attribute.setName(attributeName);
             attribute.setValue(1);
+            if (attributeName.equals("No Attribute")) {attribute.setValue(0);}
             attribute.setGameChar(this);
             attributes.add(attribute);
         }

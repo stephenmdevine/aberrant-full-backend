@@ -95,6 +95,7 @@ public class GameCharServiceImpl implements GameCharService {
                     gameChar.setBonusPoints(updateDTO.getBonusPoints());
                     gameChar.setNovaPoints(updateDTO.getNovaPoints());
                     gameChar.setExperiencePoints(updateDTO.getExperiencePoints());
+                    gameChar.setExpSpent(updateDTO.getExpSpent());
 
                     // Update additional stats
                     gameChar.setWillpowerBonus(updateDTO.getWillpowerBonus());
@@ -166,6 +167,7 @@ public class GameCharServiceImpl implements GameCharService {
                     gameChar.setBonusPoints(updateDTO.getBonusPoints());
                     gameChar.setNovaPoints(updateDTO.getNovaPoints());
                     gameChar.setExperiencePoints(updateDTO.getExperiencePoints());
+                    gameChar.setExpSpent(updateDTO.getExpSpent());
 
                     // Update additional stats
                     gameChar.setWillpowerBonus(updateDTO.getWillpowerBonus());

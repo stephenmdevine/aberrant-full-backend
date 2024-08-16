@@ -24,6 +24,7 @@ public class GameCharUpdateDTO {
     private int bonusPoints;
     private int novaPoints;
     private int experiencePoints;
+    private int expSpent;
 
     private int willpowerBonus;
     private int willpowerNova;
