@@ -42,7 +42,7 @@ public class GameChar {
     private int bonusPoints;
     private int novaPoints;
     private int experiencePoints;
-    private int expSpent;
+    private int expSpent = 0;
 
 //    Relational link to other tables
     @OneToMany(mappedBy = "gameChar", cascade = CascadeType.ALL, orphanRemoval = true)
