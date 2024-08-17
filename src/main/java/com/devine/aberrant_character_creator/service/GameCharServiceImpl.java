@@ -99,10 +99,15 @@ public class GameCharServiceImpl implements GameCharService {
 
                     // Update additional stats
                     gameChar.setWillpowerBonus(updateDTO.getWillpowerBonus());
+                    gameChar.setWillpowerNova(updateDTO.getWillpowerNova());
+                    gameChar.setWillpowerExp(updateDTO.getWillpowerExp());
                     gameChar.setQuantumBonus(updateDTO.getQuantumBonus());
                     gameChar.setQuantumNova(updateDTO.getQuantumNova());
+                    gameChar.setQuantumExp(updateDTO.getQuantumExp());
                     gameChar.setQuantumPoolBonus(updateDTO.getQuantumPoolBonus());
+                    gameChar.setQuantumPoolExp(updateDTO.getQuantumPoolExp());
                     gameChar.setInitiativeBonus(updateDTO.getInitiativeBonus());
+                    gameChar.setInitiativeExp(updateDTO.getInitiativeExp());
                     gameChar.setBaseTaint(updateDTO.getBaseTaint());
                     gameChar.setTaint(updateDTO.getTaint());
 
@@ -171,10 +176,15 @@ public class GameCharServiceImpl implements GameCharService {
 
                     // Update additional stats
                     gameChar.setWillpowerBonus(updateDTO.getWillpowerBonus());
+                    gameChar.setWillpowerNova(updateDTO.getWillpowerNova());
+                    gameChar.setWillpowerExp(updateDTO.getWillpowerExp());
                     gameChar.setQuantumBonus(updateDTO.getQuantumBonus());
                     gameChar.setQuantumNova(updateDTO.getQuantumNova());
+                    gameChar.setQuantumExp(updateDTO.getQuantumExp());
                     gameChar.setQuantumPoolBonus(updateDTO.getQuantumPoolBonus());
+                    gameChar.setQuantumPoolExp(updateDTO.getQuantumPoolExp());
                     gameChar.setInitiativeBonus(updateDTO.getInitiativeBonus());
+                    gameChar.setInitiativeExp(updateDTO.getInitiativeExp());
                     gameChar.setBaseTaint(updateDTO.getBaseTaint());
                     gameChar.setTaint(updateDTO.getTaint());
 

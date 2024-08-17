@@ -28,10 +28,14 @@ public class GameCharUpdateDTO {
 
     private int willpowerBonus;
     private int willpowerNova;
+    private int willpowerExp;
     private int quantumBonus;
     private int quantumNova;
+    private int quantumExp;
     private int quantumPoolBonus;
+    private int quantumPoolExp;
     private int initiativeBonus;
+    private int initiativeExp;
     private int baseTaint;
     private int taint;
 
