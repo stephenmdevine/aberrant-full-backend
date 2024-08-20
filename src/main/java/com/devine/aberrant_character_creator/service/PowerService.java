@@ -54,4 +54,11 @@ public class PowerService {
         return powerRepository.save(power);
     }
 
+    public void deletePower(Long id) throws GameCharNotFoundException {
+        if (!powerRepository.existsById(id)) {
+            throw new GameCharNotFoundException(id);
+        }
+        powerRepository.deleteById(id);
+    }
+
 }
